@@ -30,7 +30,24 @@ def genWaveform3(t,omega):
 
     return m
 
-def calcNormals(x,s):
+
+
+def calc_x_s(x, ds):
+    return 0
+
+def calc_x_ss(x, ds):
+    return 0
+
+def calc_x_sss(x, ds):
+    return 0
+
+def calc_x_ssss(x, ds):
+    return 0
+
+def calcNormals(x, ds):
+    # e_t = (dx/ds, dy/ds)
+    # e_n = (-dy/ds, dx/ds)
+    x_s = calc_x_s(x,s)
     return 0
 
 
