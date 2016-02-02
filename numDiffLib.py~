@@ -5,9 +5,9 @@ import scipy as sci
 import scipy.linalg
 import math
 
-n = 3   # Number of terms
-m = 1   # Position of term being expanded about
-d = 2   # Order of derivative
+n = 6   # Number of terms
+m = 6   # Position of term being expanded about
+d = 4   # Order of derivative
 
 A = np.zeros((n,n))
 
