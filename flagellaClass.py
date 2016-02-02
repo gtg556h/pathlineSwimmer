@@ -45,10 +45,37 @@ class flagella(object):
         self.en = np.zeros_like(self.x)
         self.et = np.zeros_like(self.x)
 
-        self.et[:, :, 0], self.en[:, :, 0] = sl.calcNormals(self.x[:,:,0], self.ds)
+        self.generateOperators()
+
+        #self.et[:, :, 0], self.en[:, :, 0] = sl.calcNormals(self.x[:,:,0], self.ds)
+        self.et[:, :, 0], self.en[:, :, 0] = self.calcNormals(self.x[:,:,0])
         
 
     ########
+
+    def generateOperators(self):
+        ns = self.x.shape[1]
+
+        self.calc_x_s = sl.gen_x_s(ns, self.ds)
+        # Use this function on single time point of x:
+        # x_s = self.calc_x_s(x)
+
+        self.calc_x_ss = sl.gen_x_ss(ns, self.ds)
+        self.calc_x_sss = sl.gen_x_sss(ns, self.ds)
+        self.calc_x_ssss = sl.gen_x_ssss(ns, self.ds)
+
+    ########
+
+    def calcNormals(self, x):
+        # Use this function on single time point of x:
+        # et, en = self.calcNormals(x[i,s])
+        x_s = self.calc_x_s(x)
+        e_t = np.array([x_s[0,:],x_s[1,:]])
+        e_n = np.array([-x_s[1,:], x_s[0,:]])
+        return e_t, e_n
+            
+    ########
+    
     def actuator(self):
         print('Calculating normal driving forces w(x,t)')
         if self.drivingFunction == 2:

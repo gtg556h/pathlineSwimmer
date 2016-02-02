@@ -22,12 +22,12 @@ def returnDerivative(nTerms, position, order):
     b[order] = 1
 
     c = scipy.linalg.solve(A,b)
-    return c
+    return c.T
     
 
 
 
-def genOperator(n, order):
+def genOperator(n, order, ds=1):
     # n is size of square operator
     # order is order of differentiation
 
@@ -35,11 +35,21 @@ def genOperator(n, order):
 
     specialCases = np.int(np.floor((order+1)/2))
 
+    if np.mod(order, 2) == 0:
+        centralTerms = order + 1
+    else:
+        centralTerms = order + 2
+
     for j in range(0, specialCases):
         #pdb.set_trace()
-        A[j,0:order+2] = returnDerivative(order+2, j, order).T
+        A[j,0:order+2] = returnDerivative(order+2, j, order)
 
     for j in range(specialCases, n - specialCases):
-        A[j, j-specialCases:j+specialCases+1] = returnDerivative(order+1, 
+        #pdb.set_trace()
+        A[j, j-specialCases:j+specialCases+1] = returnDerivative(centralTerms, np.int(np.floor(centralTerms/2)), order)
 
-    return A
+    for j in range(n-specialCases,n):
+        #pdb.set_trace()
+        A[j, -order-2:] = returnDerivative(order+2, j-n+2+order, order)
+        
+    return A / ds**order
