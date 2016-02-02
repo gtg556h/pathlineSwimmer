@@ -1,0 +1,5 @@
+
+* TODO Fuck the stupidity of handwriting differential operators.
+* TODO Write a function that does it for you.  Taking as arguments operator size and order of differentiation.
+* TODO Then write set of lambda functions for relevant differentiation operators to this task
+* TODO And make them class methods

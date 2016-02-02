@@ -1,0 +1,29 @@
+
+import numpy as np
+import pylab as plt
+import scipy as sci
+import scipy.linalg
+import math
+
+n = 3   # Number of terms
+m = 1   # Position of term being expanded about
+d = 2   # Order of derivative
+
+A = np.zeros((n,n))
+
+for ii in range(0,A.shape[0]):
+    for jj in range(0,A.shape[0]):
+        A[ii,jj] = (jj-m+1)**(ii)/float(math.factorial(math.fabs(ii)))
+
+#print A
+#print    
+
+b = np.zeros((n,1))
+b[d] = 1
+
+#print(b)
+#print
+
+c = scipy.linalg.solve(A,b)
+print(c)
+

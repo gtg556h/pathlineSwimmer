@@ -45,7 +45,7 @@ class flagella(object):
         self.en = np.zeros_like(self.x)
         self.et = np.zeros_like(self.x)
 
-        self.et[:, :, 0], self.en[:, :, 0] = sl.calcNormals(self.x[:,:,0], self.s)
+        self.et[:, :, 0], self.en[:, :, 0] = sl.calcNormals(self.x[:,:,0], self.ds)
         
 
     ########
